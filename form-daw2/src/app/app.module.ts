@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { TableComponent } from './components/table/table.component';
 import { ViewComponent } from './pages/view/view.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

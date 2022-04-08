@@ -1,2 +1,42 @@
 <app-toolbar></app-toolbar>
-<p>create works!</p>
+
+<div id="formulario">
+    <form [formGroup]="profileForm" (ngSubmit)="submit()" novalidate>
+        <h1 *ngIf="profile">Edit</h1>
+        <h1 *ngIf="!profile">Create new User</h1>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Name" formControlName="name">
+            <mat-error *ngIf="this.profileForm.controls['name'].errors?.['required']">
+                You must write a name 
+            </mat-error>
+            <mat-error *ngIf="this.profileForm.controls['name'].errors?.['minlength']">
+                Name has to be longer
+            </mat-error>
+            <mat-error *ngIf="this.profileForm.controls['name'].errors?.['maxlength']">
+                Name has to be shorter
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Age" formControlName="age">
+            <mat-error *ngIf="this.profileForm.controls['age'].errors?.['required']">
+                You must write a age for this user 
+            </mat-error>
+            <mat-error *ngIf="this.profileForm.controls['age'].errors?.['pattern']">
+                You must write a number 
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Description" formControlName="desc">
+            <mat-error *ngIf="this.profileForm.controls['desc'].errors?.['required']">
+                You must write a description 
+            </mat-error>
+            <mat-error *ngIf="this.profileForm.controls['desc'].errors?.['minlength']">
+                Description has to be longer
+            </mat-error>
+            <mat-error *ngIf="this.profileForm.controls['desc'].errors?.['maxlength']">
+                Description has to be shorter
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+</div>

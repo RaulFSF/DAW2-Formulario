@@ -2,3 +2,17 @@ a{
     text-decoration: none;
     color: whitesmoke;
 }
+
+#formulario{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin-top: 2vh;
+}
+
+#formulario form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

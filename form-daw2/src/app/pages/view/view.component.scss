@@ -2,3 +2,33 @@ a{
     text-decoration: none;
     color: whitesmoke;
 }
+
+#card{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 2vh;
+}
+
+#name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    
+}
+
+h3{
+    margin-right: 1vh;
+}
+
+#botones{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button{
+    margin-inline: 0.5vh;
+    margin-bottom: 1vh;
+}

@@ -1,3 +1,25 @@
 <app-toolbar></app-toolbar>
-
-<p>view works!</p>
+<div id="card">
+    <div *ngIf="profile">
+        <mat-card *ngIf="profile">
+            <mat-card-header>
+                <div id="name">
+                    <h3>Name: </h3>
+                    <h1>{{ profile.name }}</h1>
+                </div>
+            </mat-card-header>
+            <mat-card-subtitle>
+                <h3> Age: {{ profile.age }}</h3>
+            </mat-card-subtitle>
+            <mat-card-content>
+                <span> Description: {{ profile.desc }}</span>
+            </mat-card-content>
+            <mat-card-footer>
+                <div id="botones">
+                    <button mat-raised-button color="primary"><a [routerLink]="['/edit/'+profile.id]">Edit</a></button>
+                    <button mat-raised-button color="warn" (click)="deleteProfile()" >Delete</button>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>

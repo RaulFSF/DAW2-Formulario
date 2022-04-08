@@ -1,20 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Observable } from 'rxjs';
 import { Perfiles } from 'src/app/interfaces/perfiles.interface';
-
-const perfilUsers : Perfiles[] = [
-  {
-    id: 0,
-    name: "Emilio",
-    age: 20,
-    desc: "Esto es una prueba"
-  },
-  {
-    id: 1,
-    name: "Pacoooo",
-    age: 22,
-    desc: "Esto no es una prueba"
-  }
-];
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-table',
@@ -22,12 +9,21 @@ const perfilUsers : Perfiles[] = [
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit { 
-  displayedColumns: string[] = ['id', 'name', 'age', 'description', 'actions']
-  dataSource= perfilUsers; 
+  @Input() perfiles!: Perfiles[] | Observable<Perfiles[]>;
+  @Output() deleteProfileEvent = new EventEmitter<number>();
 
-  constructor() { }
+  displayedColumns: string[] = ['id', 'name', 'age', 'description', 'actions']
+  dataSource!: Perfiles[] | Observable<Perfiles[]>;
+
+  constructor(private perfilesService: ServiceService) { }
 
   ngOnInit(): void {
+    if(this.perfiles){
+      this.dataSource = this.perfiles;
+    }
   }
-
+  deleteProfile(id: number){
+    this.deleteProfileEvent.emit(id);
+    this.dataSource = this.perfilesService.getProfiles();
+  }
 }
