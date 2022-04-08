@@ -12,7 +12,6 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  flag: boolean = true;
   profileForm: FormGroup;
   profile?: Perfiles;
 
@@ -35,7 +34,6 @@ export class CreateComponent implements OnInit {
       ).subscribe(profile =>{
         if(profile){
           this.profile = profile;
-          this.flag = false;
           this.profileForm.controls['name'].setValue(profile.name);
           this.profileForm.controls['age'].setValue(profile.age);
           this.profileForm.controls['desc'].setValue(profile.desc);
@@ -43,30 +41,23 @@ export class CreateComponent implements OnInit {
           this.router.navigate(['/']);
         }
       });
-    } else{
-      this.flag = true;
     }
   }
 
   submit(): void{
+    if(this.profileForm.invalid){
+      return;
+    }
     this.profile ={
       ...this.profile,
       ...this.profileForm.value
     };
-    var validatorCont = 0;
-    var controladores = this.profileForm.controls;
-    for(let controlador in controladores){
-      if(controladores[controlador].invalid){
-        validatorCont++;
-      }
+    if(this.profile?.id){
+      this.profileService.updateProfile(this.profile!);
+    } else{
+      this.profileService.createProfile(this.profile!);
     }
-    if(validatorCont == 0){
-      if(this.flag){
-        this.profileService.createProfile(this.profile!);
-      } else{
-        this.profileService.updateProfile(this.profile!);
-      }
-      this.router.navigate(['/home']);
-    }
+    this.router.navigate(['/home']);
   }
+  
 }
